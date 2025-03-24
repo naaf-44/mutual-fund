@@ -1,0 +1,2 @@
+/Users/naveenkumar/Desktop/project/mutual-fund/android/app/.cxx/Debug/5k5x6x2o/x86_64/CMakeFiles/edit_cache.dir
+/Users/naveenkumar/Desktop/project/mutual-fund/android/app/.cxx/Debug/5k5x6x2o/x86_64/CMakeFiles/rebuild_cache.dir

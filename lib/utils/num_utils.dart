@@ -2,18 +2,18 @@ import 'package:intl/intl.dart';
 
 class NumUtils {
   static String formatAmount(double amount) {
-    String formatedAmount = "";
+    String formattedAmount = "";
     if (amount >= 10000000) {
-      formatedAmount = '${(amount / 10000000).toStringAsFixed(0)} Cr';
+      formattedAmount = '${(amount / 10000000).toStringAsFixed(0)} Cr';
     } else if (amount >= 100000) {
-      formatedAmount = '${(amount / 100000).toStringAsFixed(0)} L';
+      formattedAmount = '${(amount / 100000).toStringAsFixed(0)} L';
     } else if (amount >= 1000 && amount <= 100000) {
-      formatedAmount = '${(amount / 1000).toStringAsFixed(0)} K';
+      formattedAmount = '${(amount / 1000).toStringAsFixed(0)} K';
     } else {
-      formatedAmount = amount.toStringAsFixed(0);
+      formattedAmount = amount.toStringAsFixed(0);
     }
 
 
-    return "₹ $formatedAmount";
+    return "₹ $formattedAmount";
   }
 }

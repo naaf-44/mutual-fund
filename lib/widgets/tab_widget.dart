@@ -54,7 +54,7 @@ class TabWidgetState extends State<TabWidget>  with SingleTickerProviderStateMix
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey, width: 0.5)
+          border: Border.all(color: Colors.grey, width: 1)
         ),
         child: TabBar(
           controller: tabController,

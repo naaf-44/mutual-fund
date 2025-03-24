@@ -11,6 +11,8 @@ part 'mutual_fund_returns_cubit.freezed.dart';
 class MutualFundReturnsCubit extends Cubit<MutualFundReturnsState> {
   MutualFundReturnsCubit() : super(const MutualFundReturnsState.initial());
 
+  bool isNav = false;
+
   getReturns(ReturnType type) async {
     emit(MutualFundReturnsState.loading());
     try {

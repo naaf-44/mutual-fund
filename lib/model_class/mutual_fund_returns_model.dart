@@ -31,6 +31,7 @@ class ReturnData {
   final double? returnPercentage;
   final int? myInvestment;
   final double? myInvestPercentage;
+  final double? navReturns;
 
   ReturnData({
     this.id,
@@ -39,6 +40,7 @@ class ReturnData {
     this.returnPercentage,
     this.myInvestment,
     this.myInvestPercentage,
+    this.navReturns,
   });
 
   factory ReturnData.fromJson(Map<String, dynamic> json) {
@@ -49,6 +51,7 @@ class ReturnData {
       returnPercentage: (json['returnPercentage'] as num?)?.toDouble(),
       myInvestment: json['myInvestment'],
       myInvestPercentage: json['myInvestPercentage'],
+      navReturns: json['navReturns'],
     );
   }
 }

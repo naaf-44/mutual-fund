@@ -1,0 +1,1 @@
+ /Users/naveenkumar/Desktop/project/mutual-fund/.dart_tool/flutter_build/5f70f16d6483ec5caf0f6a893f78f75e/native_assets.json: 

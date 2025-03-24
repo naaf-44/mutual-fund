@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mutual_fund/bloc/mutual_fund_returns_bloc/mutual_fund_returns_cubit.dart';
 import 'package:mutual_fund/model_class/mutual_fund_returns_model.dart';
+import 'package:mutual_fund/utils/app_enums.dart';
 import 'package:mutual_fund/utils/num_utils.dart';
 import 'package:mutual_fund/widgets/horizontal_line_widget.dart';
 import 'package:mutual_fund/widgets/tab_widget.dart';
@@ -13,6 +16,8 @@ class ReturnsDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MutualFundReturnsCubit bloc = context.read<MutualFundReturnsCubit>();
+    bool isShown = true;
     return Container(
       padding: EdgeInsets.all(16),
       child: Column(
@@ -20,8 +25,18 @@ class ReturnsDetails extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Column(
-                  children: [
+                child: bloc.isNav ?
+                  Row(
+                    children: [
+                      HorizontalLineWidget(color: Colors.white),
+                      Text(
+                        "NAV - 23.6%(104.2)",
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ],
+                  ) :
+                  Column(
+                    children: [
                     Row(
                       children: [
                         HorizontalLineWidget(color: Colors.blue),
@@ -45,7 +60,10 @@ class ReturnsDetails extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+                  bloc.isNav = !bloc.isNav;
+                  bloc.getReturns(ReturnType.threeMonth);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent, // No fill color
                   shadowColor: Colors.transparent, // Remove shadow
@@ -56,23 +74,75 @@ class ReturnsDetails extends StatelessWidget {
                 ),
                 child: Text(
                   "NAV",
-                  style: const TextStyle(color: Colors.grey), // Grey text
+                  style: TextStyle(color: bloc.isNav ? Colors.white : Colors.grey), // Grey text
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 80),
           SizedBox(
             height: 200,
             width: MediaQuery.of(context).size.width,
             child: LineChart(
               LineChartData(
                 gridData: FlGridData(show: false),
-                titlesData: FlTitlesData(show: false),
+                titlesData: FlTitlesData(
+                  bottomTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: (double value, TitleMeta meta) {
+                        int year = 2020 + value.toInt();
+                        if (year >= 2020 && year <= 2025) {
+                          isShown = !isShown;
+                          if(isShown) {
+                            return Text(
+                              year.toString(),
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 12),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        } else {
+                          return Container(); // No title for values outside of 0-4
+                        }
+                      },
+                    ),
+                  ),
+                  leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                ),
                 borderData: FlBorderData(show: false),
+                lineTouchData: LineTouchData(
+                  touchTooltipData: LineTouchTooltipData(
+                    getTooltipColor: (color) {
+                      return Colors.transparent;
+                    },
+                    tooltipBorder: BorderSide(color: Colors.blue, width: 1),
+                    tooltipRoundedRadius: 6,
+                    getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+                      return touchedBarSpots.map((LineBarSpot spot) {
+                        return LineTooltipItem(
+                          NumUtils.formatAmount(spot.x),
+                          TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        );
+                      }).toList();
+                    },
+                  ),
+                  handleBuiltInTouches: true,
+                ),
                 lineBarsData: [
-                  getLineBarData(returnData),
-                  getLineBarData(returnData, isReturn: false),
+                  if(!bloc.isNav)
+                    getLineBarData(returnData, "return"),
+                  if(!bloc.isNav)
+                    getLineBarData(returnData, "invest"),
+                  if(bloc.isNav)
+                    getLineBarData(returnData, "nav"),
                 ],
               ),
             ),
@@ -84,19 +154,21 @@ class ReturnsDetails extends StatelessWidget {
     );
   }
 
-  LineChartBarData getLineBarData(List<ReturnData>? returnData, {bool isReturn = true}) {
+  LineChartBarData getLineBarData(List<ReturnData>? returnData, String type) {
     List<FlSpot> flSpot = [];
     for(var data in returnData!) {
-      if(isReturn) {
+      if(type == "return") {
         flSpot.add(FlSpot(data.id!.toDouble(), data.returnPercentage!));
-      } else {
+      } else if(type == "invest") {
         flSpot.add(FlSpot(data.id!.toDouble(), data.myInvestPercentage!));
+      } else {
+        flSpot.add(FlSpot(data.id!.toDouble(), data.navReturns!));
       }
     }
     return LineChartBarData(
       spots: flSpot,
       isCurved: true,
-      color: isReturn ? Colors.blue : Colors.orange,
+      color: type == "return" ? Colors.blue : type == "invest" ? Colors.orange : Colors.white,
       barWidth: 1,
       isStrokeCapRound: true,
       dotData: const FlDotData(show: false),
