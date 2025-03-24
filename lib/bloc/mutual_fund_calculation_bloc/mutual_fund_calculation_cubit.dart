@@ -32,7 +32,7 @@ class MutualFundCalculationCubit extends Cubit<MutualFundCalculationState> {
         GraphData(val1: 150, val2: 20),
       ] : [
         GraphData(val1: 150, val2: 20),
-        GraphData(val1: 100, val2: 50),
+        GraphData(val1: 70, val2: 10),
         GraphData(val1: 50, val2: 40),
       ]
     );

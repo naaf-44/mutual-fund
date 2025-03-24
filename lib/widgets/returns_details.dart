@@ -17,7 +17,8 @@ class ReturnsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MutualFundReturnsCubit bloc = context.read<MutualFundReturnsCubit>();
-    bool isShown = true;
+    List<String> years = ["2020", "2021", "2022", "2023", "2024", "2025"];
+
     return Container(
       padding: EdgeInsets.all(16),
       child: Column(
@@ -91,20 +92,14 @@ class ReturnsDetails extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: true,
                       getTitlesWidget: (double value, TitleMeta meta) {
-                        int year = 2020 + value.toInt();
-                        if (year >= 2020 && year <= 2025) {
-                          isShown = !isShown;
-                          if(isShown) {
-                            return Text(
-                              year.toString(),
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 12),
-                            );
-                          } else {
-                            return Container();
-                          }
-                        } else {
-                          return Container(); // No title for values outside of 0-4
+                        try {
+                          return Text(
+                            years[int.parse(meta.formattedValue)],
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 12),
+                          );
+                        } catch (e) {
+                          return Container();
                         }
                       },
                     ),
@@ -122,16 +117,23 @@ class ReturnsDetails extends StatelessWidget {
                     tooltipBorder: BorderSide(color: Colors.blue, width: 1),
                     tooltipRoundedRadius: 6,
                     getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
-                      return touchedBarSpots.map((LineBarSpot spot) {
+                      return [touchedBarSpots.map((LineBarSpot spot) {
+                        String tooltipText = '';
+                        tooltipText = "${returnData![spot.barIndex].date}\n"
+                            "Your Investment ${NumUtils.formatAmount(spot.x)}"
+                            "\n"
+                            "Nifty Midcap ${NumUtils.formatAmount(spot.y)}";
+
                         return LineTooltipItem(
-                          NumUtils.formatAmount(spot.x),
+                          tooltipText,
                           TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
                           ),
+                          textAlign: TextAlign.start
                         );
-                      }).toList();
+                      }).first, null];
                     },
                   ),
                   handleBuiltInTouches: true,
