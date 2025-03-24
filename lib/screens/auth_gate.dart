@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mutual_fund/screens/mutual_fund_list_screen.dart';
 import 'package:mutual_fund/screens/signin_screen.dart';
-import 'package:mutual_fund/screens/signup_screen.dart';
 import 'package:mutual_fund/utils/inject.dart';
 import 'package:mutual_fund/utils/preference_handler.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
