@@ -1,0 +1,45 @@
+[
+  {
+    "id" : 1,
+    "fundName": "Axis Bluechip Fund",
+    "growth" : "Direct Growth",
+    "nav": 52.75,
+    "returns": 12.50,
+    "returnPercentage": 12.5,
+    "investedAmount": 100000,
+    "currentValue": 112800.50,
+    "totalGain": 12800.50,
+    "totalGainPercentage": 12.8,
+    "yourInvestment": 50000,
+    "niftyMidcap": 32150.75
+  },
+  {
+    "id" : 2,
+    "fundName": "SBI Small Cap Fund",
+    "growth" : "Direct Growth",
+    "nav": 105.20,
+    "returns": 15.25,
+    "returnPercentage": 15.75,
+    "investedAmount": 80000,
+    "currentValue": 95750.25,
+    "totalGain": 15750.25,
+    "totalGainPercentage": 19.7,
+    "yourInvestment": 60000,
+    "niftyMidcap": 32400.20
+  },
+  {
+    "id" : 3,
+    "fundName": "HDFC Equity Fund",
+    "growth" : "Direct Growth",
+    "nav": 88.45,
+    "returns": 10.75,
+    "returnPercentage": 10.25,
+    "investedAmount": 90000,
+    "currentValue": 100250.75,
+    "totalGain": 10250.75,
+    "totalGainPercentage": 11.4,
+    "yourInvestment": 45000,
+    "niftyMidcap": 31980.10
+  }
+]
+
