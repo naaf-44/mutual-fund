@@ -7,12 +7,15 @@ import 'package:mutual_fund/utils/num_utils.dart';
 part 'mutual_fund_calculation_state.dart';
 part 'mutual_fund_calculation_cubit.freezed.dart';
 
+/// MutualFundCalculationCubit to handle bar graph data of mutual.
+
 class MutualFundCalculationCubit extends Cubit<MutualFundCalculationState> {
   MutualFundCalculationCubit() : super(const MutualFundCalculationState.initial());
 
   bool isMonthlyInvest = false;
   TextEditingController investController = TextEditingController();
 
+  /// getCalculation based on month and yearly data
   getCalculation(int invest, {bool isMonthly = false}) {
     emit(MutualFundCalculationState.loading());
     isMonthlyInvest = isMonthly;

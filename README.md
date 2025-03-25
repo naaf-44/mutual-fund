@@ -4,13 +4,18 @@ Mutual Fund
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## application
 
-A few resources to get you started if this is your first Flutter project:
+1. open the application
+2. create an account using email and password
+3. once the account is created, it'll navigate us to the mutual fund list screen.
+4. if you click on any fund it'll take us to the mutual fund dashboard.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## code
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+if you want to run the code in the any editor
+make sure you run below command first.
+dart run build_runner build --delete-conflicting-outputs 
+
+bloc cubit state management is used
+shared preference is used to store the session locally.

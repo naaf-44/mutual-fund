@@ -5,6 +5,9 @@ import 'package:mutual_fund/screens/signup_screen.dart';
 import 'package:mutual_fund/utils/form_utils.dart';
 import 'package:mutual_fund/utils/validator.dart';
 
+/// sign in screen used to signIn.
+/// uses SupaBase login.
+/// signIn using email and password.
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 

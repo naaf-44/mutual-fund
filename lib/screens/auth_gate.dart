@@ -5,6 +5,11 @@ import 'package:mutual_fund/utils/inject.dart';
 import 'package:mutual_fund/utils/preference_handler.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+/// this screen handles different connection state.
+/// uses StreamBuilder to listen to the state.
+/// if data present in the local navigates to mutual fund list.
+/// else goes to login page.
+
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
 

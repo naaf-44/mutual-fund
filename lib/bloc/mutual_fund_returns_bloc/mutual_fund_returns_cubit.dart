@@ -8,6 +8,9 @@ import 'package:flutter/services.dart' show rootBundle;
 part 'mutual_fund_returns_state.dart';
 part 'mutual_fund_returns_cubit.freezed.dart';
 
+/// MutualFundReturnsCubit is to get the returns data from file fund_returns.json file
+/// this is used to display the line graph
+/// shows returns, my investment and nav value
 class MutualFundReturnsCubit extends Cubit<MutualFundReturnsState> {
   MutualFundReturnsCubit() : super(const MutualFundReturnsState.initial());
 
@@ -16,9 +19,14 @@ class MutualFundReturnsCubit extends Cubit<MutualFundReturnsState> {
   getReturns(ReturnType type) async {
     emit(MutualFundReturnsState.loading());
     try {
+      /// read the data from fund_returns.json
+      /// convert the data into model class
+      /// emit success state with the data.
       String jsonString = await rootBundle.loadString('assets/fund_returns.json');
       final data = jsonDecode(jsonString);
       MutualFundReturnsModel model = MutualFundReturnsModel.fromJson(data);
+
+      /// return the data based on the ReturnType input.
       List<ReturnData>? returnData;
       switch(type) {
         case ReturnType.month:

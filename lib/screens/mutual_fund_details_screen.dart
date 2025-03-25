@@ -11,6 +11,8 @@ import 'package:mutual_fund/widgets/icon_button.dart';
 import 'package:mutual_fund/widgets/loader.dart';
 import 'package:mutual_fund/widgets/returns_details.dart';
 
+/// displays all the information about the mutual fund.
+/// displays line graph, bar graph and other basic details.
 class MutualFundDetailsScreen extends StatelessWidget {
   final int? id;
 

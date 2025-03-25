@@ -6,6 +6,8 @@ import 'package:mutual_fund/screens/mutual_fund_details_screen.dart';
 import 'package:mutual_fund/utils/form_utils.dart';
 import 'package:mutual_fund/widgets/loader.dart';
 
+/// displays mutual fund list
+/// once click on the list navigates to mutual fund dashboard.
 class MutualFundListScreen extends StatelessWidget {
   const MutualFundListScreen({super.key});
 

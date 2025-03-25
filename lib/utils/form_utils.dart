@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-
+/// formUtils which contains the common functionalities used in the application widget.
 class FormUtils {
+
+  /// input decoration
+  /// used multiple times by input widget.
   static InputDecoration inputDecoration({String labelText = ""}) {
     return InputDecoration(
       labelText: labelText,
@@ -11,6 +14,7 @@ class FormUtils {
     );
   }
 
+  /// appBar used multiple time by the screen
   static AppBar appBar(String title, {bool showBackButton = false}) {
     return AppBar(
       backgroundColor: Colors.black,

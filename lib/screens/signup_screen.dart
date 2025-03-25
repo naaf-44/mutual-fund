@@ -5,6 +5,9 @@ import 'package:mutual_fund/screens/signin_screen.dart';
 import 'package:mutual_fund/utils/form_utils.dart';
 import 'package:mutual_fund/utils/validator.dart';
 
+/// signUp screen used to signup to the application.
+/// sign up using email and password.
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
